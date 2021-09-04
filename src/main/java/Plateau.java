@@ -1,43 +1,53 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Plateau {
 
-    private static  int height ;
-    private static  int width ;
+    private static  int maxHeight;
+    private static  int maxWidth;
+    private static  int minHeight = 0 ;
+    private static  int minWidth = 0 ;
 
-    public  Plateau(int height , int width){
-        this.height = height;
-        this.width = width;
+   // private List<Robot> robots = new ArrayList<Robot>();
+
+    public  void plateauCoordinate(String command){
+        String[] cmnd=   command.split(" ");
+
+        this.maxHeight = Integer.parseInt(cmnd[0]);
+        this.maxWidth = Integer.parseInt(cmnd[1]);
+
+
     }
 
-    public  boolean isFree(Coordinate coordinate){
-        if((coordinate.getY() == 0) && (coordinate.getX() == 0)){
-            return true;
-        }else {
-            return false;
-        }
-    }
     public Coordinate move(Coordinate coordinate, Direction direction){
 
         int x= coordinate.getX();
         int y =coordinate.getY();
 
+        // check if coordinate are inside plateau
+
+        if ((x > maxWidth) || (y> maxHeight) || (x < minWidth) || (y < minHeight) ) {
+            throw new IllegalArgumentException("Rover is outside plateau");
+        }
         if (direction == Direction.NORTH){
-            y = (y >= height) ? (y-height) +1 : y + 1  ;
+            y = (y >= maxHeight) ? (y- maxHeight) +1 : y + 1  ;
         }
         if (direction == Direction.SOUTH){
-            y = (y > 0) ? y-1 : height -1 ;
+            y = (y > minHeight) ? y-1 : maxHeight -1 ;
         }
         if (direction == Direction.EAST){
-            x = (x >= width) ? (x-width) +1 : x + 1  ;
+            x = (x >= maxWidth) ? (x- maxWidth) +1 : x + 1  ;
         }
         if (direction == Direction.WEST){
-            x = (x > 0) ? x-1 : width -1 ;
+            x = (x > minWidth) ? x-1 : maxWidth -1 ;
         }
 
         return  new Coordinate(x,y);
     }
 
-    public void dropRobot(Coordinate coordinate){
-        coordinate.setX(0);
-        coordinate.setY(0);
-    }
+   /* second solution
+   public void addRobot(Robot robot){
+        robots.add(robot);
+    }*/
+
 }

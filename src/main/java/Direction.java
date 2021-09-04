@@ -1,5 +1,4 @@
-
-    enum Direction{
+enum Direction{
         NORTH("N", "W", "E"),
         SOUTH("S", "E", "W"),
         EAST("E", "N", "S"),
@@ -38,5 +37,5 @@
         public String current(){
             return current;
         }
-    }
+}
 

@@ -4,9 +4,13 @@ public class Robot {
     Direction direction;
     Coordinate coordinate = new Coordinate(0,0);
     Plateau plateau ;
+
+  //  private boolean free = false;
+
      public Robot(Plateau plateau){
       this.plateau = plateau;
      }
+
     public  void setPosition(String command){
       String[] cmn=   command.split(" ");
      
@@ -28,38 +32,31 @@ public class Robot {
 
     }
     String excute(String commands){
+
+
+
         for (char c : commands.toCharArray()){
             if (c == 'L'){
 
                 direction = direction.left();
 
             }
-            if (c == 'R'){
+            else if (c == 'R'){
                 direction = direction.right();
 
             }
-            if (c == 'M'){
-            //  boolean free =  plateau.isFree(coordinate);
-
+           else  if (c == 'M'){
+                 // free = false;
                   coordinate = plateau.move(coordinate,direction);
 
-
-
+            }
+            else {
+                throw new IllegalArgumentException("Please enter valid command");
             }
         }
+       // free = true;
 
         return coordinate.getX()+" "+coordinate.getY()+" "+ direction.current();
     }
 
-
-
-    public static void main(String args[]){
-       Plateau plateau = new Plateau(5,5);
-
-        Robot robot = new Robot(plateau);
-        robot.setPosition("3 3 E");
-        String result = robot.excute("MMRMMRMRRM");
-        System.out.println(result);
-
-    }
 }
