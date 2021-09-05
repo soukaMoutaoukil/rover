@@ -26,7 +26,15 @@ public class Plateau {
         }
         robots.add(robot);
     }
+    public boolean isInPlateau(Coordinate coordinate) {
+        // check if coordinate are inside plateau
 
+        if ((coordinate.getX() > maxWidth) || (coordinate.getY() > maxHeight) || (coordinate.getX() < minWidth) || (coordinate.getY() < minHeight)) {
+            return false;
+
+        }
+        return true;
+    }
     public Coordinate move(Coordinate coordinate, Direction direction) {
 
         int x = coordinate.getX();
@@ -46,16 +54,6 @@ public class Plateau {
         }
 
         return new Coordinate(x, y);
-    }
-
-    public boolean isInPlateau(Coordinate coordinate) {
-        // check if coordinate are inside plateau
-
-        if ((coordinate.getX() > maxWidth) || (coordinate.getY() > maxHeight) || (coordinate.getX() < minWidth) || (coordinate.getY() < minHeight)) {
-            return false;
-
-        }
-        return true;
     }
 
     public boolean isFree(Coordinate coordinate) {
