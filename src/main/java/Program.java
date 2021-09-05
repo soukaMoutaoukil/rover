@@ -6,9 +6,12 @@ public class Program {
         System.out.println("Plateau dimensions : ");
         Scanner scanner = new Scanner(System.in);
         String dimensions = scanner.nextLine();
+
+        // Create Plateau
         Plateau plateau = new Plateau();
         plateau.plateauCoordinate(dimensions);
         while (true) {
+            //add robot to plateau
             Robot robot = new Robot();
             System.out.println("Rover Initialization");
             String position = scanner.nextLine();
