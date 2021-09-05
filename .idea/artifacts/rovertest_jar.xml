@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="rovertest:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/rovertest_jar</output-path>
-    <root id="archive" name="rovertest.jar">
-      <element id="module-output" name="rovertest" />
-    </root>
-  </artifact>
-</component>
