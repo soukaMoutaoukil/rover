@@ -20,6 +20,10 @@ public class Plateau {
     }
 
     public void addRover(Robot robot) {
+
+        if (!isInPlateau(robot.coordinate)) {
+            throw new IllegalArgumentException("Rover is outside plateau");
+        }
         robots.add(robot);
     }
 
@@ -27,12 +31,6 @@ public class Plateau {
 
         int x = coordinate.getX();
         int y = coordinate.getY();
-
-        // check if coordinate are inside plateau
-
-        if ((x > maxWidth) || (y > maxHeight) || (x < minWidth) || (y < minHeight)) {
-            throw new IllegalArgumentException("Rover is outside plateau");
-        }
 
         if (direction == Direction.NORTH) {
             y = (y >= maxHeight) ? (y - maxHeight) + 1 : y + 1;
@@ -48,6 +46,16 @@ public class Plateau {
         }
 
         return new Coordinate(x, y);
+    }
+
+    public boolean isInPlateau(Coordinate coordinate) {
+        // check if coordinate are inside plateau
+
+        if ((coordinate.getX() > maxWidth) || (coordinate.getY() > maxHeight) || (coordinate.getX() < minWidth) || (coordinate.getY() < minHeight)) {
+            return false;
+
+        }
+        return true;
     }
 
     public boolean isFree(Coordinate coordinate) {
