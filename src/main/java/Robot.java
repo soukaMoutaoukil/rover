@@ -8,22 +8,29 @@ public class Robot {
     public void setPosition(String command) {
         String[] cmn = command.split(" ");
 
-        coordinate.setX(Integer.parseInt(cmn[0]));
-        coordinate.setY(Integer.parseInt(cmn[1]));
+        try {
+            coordinate.setX(Integer.parseInt(cmn[0]));
+            coordinate.setY(Integer.parseInt(cmn[1]));
+
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Please enter valid position");
+        }
+
         if (cmn[2].equals("N")) {
             this.direction = Direction.NORTH;
         }
-        if (cmn[2].equals("S")) {
+        else if (cmn[2].equals("S")) {
             this.direction = Direction.SOUTH;
         }
-        if (cmn[2].equals("E")) {
+        else if (cmn[2].equals("E")) {
             this.direction = Direction.EAST;
         }
-        if (cmn[2].equals("W")) {
+        else if (cmn[2].equals("W")) {
             this.direction = Direction.WEST;
         }
-
-
+        else {
+            throw new IllegalArgumentException("Please enter valid direction");
+        }
     }
 
     public String excute(String commands, Plateau plateau) {
